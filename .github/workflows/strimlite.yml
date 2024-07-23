@@ -15,12 +15,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.11'
       - name: Install dependencies
         run: |
           pip install streamlit
       - name: Run Streamlit app
         run: |
-          streamlit run app.py --server.port $(( 8500 + matrix.instance ))  
+          PORT=$(( 8500 + matrix.instance ))  # Hitung port di luar perintah streamlit
+          streamlit run app.py --server.port $PORT  
         env:
           STREAMLIT_SERVER_PORT: $(( 8500 + matrix.instance ))

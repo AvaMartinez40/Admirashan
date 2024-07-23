@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        instance: [1, 2, 3, 4]  # Max Parallelisem
+        instance: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -21,6 +21,6 @@ jobs:
           pip install streamlit
       - name: Run Streamlit app
         run: |
-          streamlit run app.py --server.port ${{ 8500 + matrix.instance }}  # Port berbeda tiap instance
+          streamlit run app.py --server.port $(( 8500 + matrix.instance ))  
         env:
-          STREAMLIT_SERVER_PORT: ${{ 8500 + matrix.instance }}  # Set port sesuai instance
+          STREAMLIT_SERVER_PORT: $(( 8500 + matrix.instance ))

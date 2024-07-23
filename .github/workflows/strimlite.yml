@@ -22,6 +22,4 @@ jobs:
       - name: Run Streamlit app
         run: |
           echo Running on port $(( 8500 + matrix.instance ))
-          streamlit run app.py --server.port $(( 8500 + matrix.instance ))  # Hitung port langsung di sini
-        env:
-          # Tidak perlu lagi PORT di sini
+          streamlit run app.py --server.port $(( 8500 + matrix.instance ))

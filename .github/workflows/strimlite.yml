@@ -10,8 +10,6 @@ jobs:
     strategy:
       matrix:
         instance: [1, 2, 3, 4]
-    env:  
-      PORT: ${{ 8500 + matrix.instance }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -23,5 +21,7 @@ jobs:
           pip install streamlit
       - name: Run Streamlit app
         run: |
-          echo ${{ env.PORT }} # Menampilkan nilai PORT untuk debugging
-          streamlit run app.py --server.port ${{ env.PORT }}  
+          echo Running on port $(( 8500 + matrix.instance ))
+          streamlit run app.py --server.port $(( 8500 + matrix.instance ))  # Hitung port langsung di sini
+        env:
+          # Tidak perlu lagi PORT di sini

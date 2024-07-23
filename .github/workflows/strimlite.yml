@@ -10,8 +10,8 @@ jobs:
     strategy:
       matrix:
         instance: [1, 2, 3, 4]
-    env:  # Pindahkan perhitungan port ke tingkat job
-      PORT: ${{8500+matrix.instance}}
+    env:  
+      PORT: ${{ 8500 + matrix.instance }}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -23,4 +23,5 @@ jobs:
           pip install streamlit
       - name: Run Streamlit app
         run: |
-          streamlit run app.py --server.port ${{ env.PORT }}  # Gunakan variabel env.PORT
+          echo ${{ env.PORT }} # Menampilkan nilai PORT untuk debugging
+          streamlit run app.py --server.port ${{ env.PORT }}  
